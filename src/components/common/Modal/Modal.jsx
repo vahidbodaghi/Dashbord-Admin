@@ -13,11 +13,11 @@ export default function Modal({ Trigger, children, title, onSubmit }) {
       <div onClick={openModal}>{Trigger}</div>
       <div
         className={clsx(
-          "w-dvw h-dvh right-0 top-0 fixed z-10 bg-black/20 flex justify-center items-center transition-all duration-300",
+          "fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4",
           isOpenModal ? "" : "invisible opacity-0",
         )}
       >
-        <div className="w-1/3 rounded-lg overflow-hidden bg-white drop-shadow-2xl/30  max-h-1/2">
+        <div className="max-w-full rounded-lg overflow-hidden bg-white drop-shadow-2xl/30  max-h-full">
           <div className="flex items-center justify-between px-4 h-4 my-4 ">
             <span className="text-lg text-zinc-800 font-bold">{title}</span>
             <button
@@ -31,7 +31,7 @@ export default function Modal({ Trigger, children, title, onSubmit }) {
             {children}
           </div>
           <div className="min-h-14 flex items-center justify-end px-4 gap-2 ">
-            <ModalFooter onSubmit={onSubmit} openModal={openModal}/>
+            <ModalFooter onSubmit={onSubmit} openModal={openModal} />
           </div>
         </div>
       </div>

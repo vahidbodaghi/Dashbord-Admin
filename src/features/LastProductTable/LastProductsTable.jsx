@@ -14,21 +14,38 @@ import ChangeVisibiltyIcon from "./components/ChangeVisibiltyIcon";
 import EditProductIcon from "./components/EditProductIcon";
 import { useEffect, useState } from "react";
 import useDelete from "../../hook/useDelete";
+import useUpdate from "../../hook/useUpdate";
 
 export default function LastProductsTable() {
   const { data, error, loading } = useFetch("http://localhost:3001/products");
   const { remove, error: errorDelete, loading: loadingDelete } = useDelete();
+  const { update } = useUpdate();
 
   const [lastProduct, setLastProduct] = useState([]);
 
-  useEffect(() => {
-    setLastProduct(data);
-  }, [data]);
+
+ 
   const removeProduct = async (id) => {
     const success = await remove(`http://localhost:3001/products/${id}`);
 
     if (success) {
       setLastProduct((prev) => prev.filter((product) => product.id !== id));
+    }
+  };
+  const changeProductVisibility = async (id) => {
+    const productToUpdate = lastProduct.find((p) => p.id === id);
+    const updatedProduct = {
+      ...productToUpdate,
+      isPunlished: !productToUpdate.isPunlished,
+    };
+
+    const result = await update(
+      `http://localhost:3001/products/${id}`,
+      updatedProduct,
+    );
+
+    if (result) {
+      setLastProduct((prev) => prev.map((p) => (p.id === id ? result : p)));
     }
   };
 
@@ -53,7 +70,14 @@ export default function LastProductsTable() {
   };
   return (
     <div className="">
-      <Table header={{ title: "لیست محصولات", Buttons: Buttons }}>
+      <Table
+        header={{ title: "لیست محصولات", Buttons: Buttons }}
+        pagination={{
+          items: data,
+          setItems: setLastProduct,
+          itemsPerPage: 5,
+        }}
+      >
         <TableHead>
           {productsTableHeadRow.map((row) => (
             <TableHeadCell key={row}>{row}</TableHeadCell>
@@ -83,7 +107,10 @@ export default function LastProductsTable() {
               </TableCell>
               <TableCell>
                 <div className="flex items-center gap-2">
-                  <ChangeVisibiltyIcon product={product} />
+                  <ChangeVisibiltyIcon
+                    product={product}
+                    onToggle={() => changeProductVisibility(product.id)}
+                  />
                   <RemoveProductIcon
                     product={product}
                     onRemove={() => removeProduct(product.id)}

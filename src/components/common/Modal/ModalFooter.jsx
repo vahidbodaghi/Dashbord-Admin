@@ -1,9 +1,9 @@
-export default function ModalFooter({ onSubmit, onCancel }) {
+export default function ModalFooter({ onSubmit, openModal }) {
   return (
     <div className="flex justify-between items-center mx-2 w-full *:rounded-lg *:py-1 *:px-2 *:cursor-pointer">
       <button
         className="bg-red-400/60 text-red-600"
-        onClick={onCancel}
+        onClick={openModal}
         type="button"
       >
         انصراف
