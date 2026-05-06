@@ -1,0 +1,46 @@
+# --- DEPENDENCIES ---
+node_modules/
+
+# --- VITE BUILD OUTPUT ---
+dist/
+build/
+
+# --- ENVIRONMENT VARIABLES ---
+.env
+.env.*
+!.env.example
+
+# --- LOG FILES ---
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- EDITORS ---
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.iml
+
+# --- OS FILES ---
+.DS_Store
+Thumbs.db
+
+# --- CACHE / TEMP ---
+.cache/
+.parcel-cache/
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+# --- TEST COVERAGE ---
+coverage/
+
+# --- TAILWIND ---
+*.tailwind.css
+
+# --- OPTIONAL ---
+*.local

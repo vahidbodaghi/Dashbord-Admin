@@ -1,0 +1,93 @@
+{
+  "products": [
+    {
+      "id": "2",
+      "title": "ایفون 17 پرو مکس نارنجی",
+      "description": "گوشی موبایل اپل مدل iPhone 17 Pro Max ZAA تک سیم کارت + eSim ظرفیت 256 گیگابایت و رم 12 گیگابایت - نات اکتیو",
+      "img": "images/profilo.jpg",
+      "isPunlished": false,
+      "price": 28000000
+    },
+    {
+      "id": "3",
+      "title": "ایفون 17 پرو مکس نارنجی",
+      "description": "گوشی موبایل اپل مدل iPhone 17 Pro Max ZAA تک سیم کارت + eSim ظرفیت 256 گیگابایت و رم 12 گیگابایت - نات اکتیو",
+      "img": "images/profilo.jpg",
+      "isPunlished": false,
+      "price": 28000000
+    },
+    {
+      "id": "4",
+      "title": "ایفون 17 پرو مکس نارنجی",
+      "description": "گوشی موبایل اپل مدل iPhone 17 Pro Max ZAA تک سیم کارت + eSim ظرفیت 256 گیگابایت و رم 12 گیگابایت - نات اکتیو",
+      "img": "images/profilo.jpg",
+      "isPunlished": false,
+      "price": 28000000
+    },
+    {
+      "id": "5",
+      "title": "ایفون 17 پرو مکس نارنجی",
+      "description": "گوشی موبایل اپل مدل iPhone 17 Pro Max ZAA تک سیم کارت + eSim ظرفیت 256 گیگابایت و رم 12 گیگابایت - نات اکتیو",
+      "img": "images/profilo.jpg",
+      "isPunlished": false,
+      "price": 28000000
+    },
+    {
+      "id": "6",
+      "title": "ایفون 17 پرو مکس نارنجی",
+      "description": "گوشی موبایل اپل مدل iPhone 17 Pro Max ZAA تک سیم کارت + eSim ظرفیت 256 گیگابایت و رم 12 گیگابایت - نات اکتیو",
+      "img": "images/profilo.jpg",
+      "isPunlished": false,
+      "price": 28000000
+    },
+    {
+      "id": "8",
+      "title": "ایفون 17 پرو مکس نارنجی",
+      "description": "گوشی موبایل اپل مدل iPhone 17 Pro Max ZAA تک سیم کارت + eSim ظرفیت 256 گیگابایت و رم 12 گیگابایت - نات اکتیو",
+      "img": "images/profilo.jpg",
+      "isPunlished": false,
+      "price": 28000000
+    },
+    {
+      "id": "9",
+      "title": "ایفون 17 پرو مکس نارنجی",
+      "description": "گوشی موبایل اپل مدل iPhone 17 Pro Max ZAA تک سیم کارت + eSim ظرفیت 256 گیگابایت و رم 12 گیگابایت - نات اکتیو",
+      "img": "images/profilo.jpg",
+      "isPunlished": false,
+      "price": 28000000
+    },
+    {
+      "id": "10",
+      "title": "ایفون 17 پرو مکس نارنجی",
+      "description": "گوشی موبایل اپل مدل iPhone 17 Pro Max ZAA تک سیم کارت + eSim ظرفیت 256 گیگابایت و رم 12 گیگابایت - نات اکتیو",
+      "img": "images/profilo.jpg",
+      "isPunlished": false,
+      "price": 28000000
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "userName": "vahid",
+      "lastName": "bodaghi",
+      "password": "vahidbodaghi"
+    }
+  ],
+  "tickets": [
+    {
+      "id": "1",
+      "userName": "vahid",
+      "lastName": "bodaghi",
+      "password": "vahidbodaghi"
+    }
+  ],
+  "admin": [
+    {
+      "id": "1",
+      "userName": "vahid",
+      "lastName": "bodaghi",
+      "password": "vahidbodaghi"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
