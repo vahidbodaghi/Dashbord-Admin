@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 import useDelete from "../../hook/useDelete";
 import useUpdate from "../../hook/useUpdate";
 
-export default function LastProductsTable() {
+export default function ProductsTable() {
   const { data, error, loading } = useFetch("http://localhost:3001/products");
   const { remove, error: errorDelete, loading: loadingDelete } = useDelete();
   const { update } = useUpdate();

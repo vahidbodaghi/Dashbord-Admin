@@ -3,7 +3,7 @@ import SectionTitle from "../../components/common/SectionTitle";
 import { useNavigate } from "react-router";
 import Summaries from "../../features/Summaries/Summaries";
 import DetailsCharts from "../../features/DetailsCharts/DetailsCharts";
-import LastProductsTable from "../../features/LastProductTable/LastProductsTable";
+import ProductsTable from "../../features/ProductTable/ProductsTable";
 
 export default function Home() {
   const [isRedirecting, setIsRedirecting] = useState(false);
@@ -35,7 +35,7 @@ export default function Home() {
       <Summaries/>
       <div>
         <DetailsCharts/>
-        <LastProductsTable/>
+        <ProductsTable/>
         {/* <QuickOverview/> */}
       </div>
     </>
