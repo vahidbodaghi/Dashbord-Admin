@@ -12,7 +12,7 @@ import clsx from "clsx";
 import RemoveProductIcon from "./components/RemoveProductIcon";
 import ChangeVisibiltyIcon from "./components/ChangeVisibiltyIcon";
 import EditProductIcon from "./components/EditProductIcon";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useDelete from "../../hook/useDelete";
 import useUpdate from "../../hook/useUpdate";
 
@@ -23,8 +23,6 @@ export default function ProductsTable() {
 
   const [lastProduct, setLastProduct] = useState([]);
 
-
- 
   const removeProduct = async (id) => {
     const success = await remove(`http://localhost:3001/products/${id}`);
 

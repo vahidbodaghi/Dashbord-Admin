@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import Summaries from "../../features/Summaries/Summaries";
 import DetailsCharts from "../../features/DetailsCharts/DetailsCharts";
 import ProductsTable from "../../features/ProductTable/ProductsTable";
+import QuickOverview from "../../features/QuickOverview/QuickOverview";
 
 export default function Home() {
   const [isRedirecting, setIsRedirecting] = useState(false);
@@ -36,7 +37,7 @@ export default function Home() {
       <div>
         <DetailsCharts/>
         <ProductsTable/>
-        {/* <QuickOverview/> */}
+        <QuickOverview/>
       </div>
     </>
   );
