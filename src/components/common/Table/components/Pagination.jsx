@@ -1,43 +1,41 @@
 import { useState, useEffect } from "react";
 
-export default function Pagination({ items, itemsPerPage, setItems }) {
+export default function Pagination({ items = [], itemsPerPage = 5, setItems }) {
   const [currentPage, setCurrentPage] = useState(1);
   const pageCount = Math.ceil(items.length / itemsPerPage);
-
-  const changePageHandler = (pageNumber) => setCurrentPage(pageNumber);
-
+  const changePageHandler = (pageNumber) => {
+    if (pageNumber < 1 || pageNumber > pageCount) return;
+    setCurrentPage(pageNumber);
+  };
   useEffect(() => {
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     const paginatedItems = items.slice(startIndex, endIndex);
-    setItems(paginatedItems);
-  }, [currentPage]);
 
+    setItems(paginatedItems);
+  }, [currentPage, items, itemsPerPage, setItems]);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [items]);
   const getPages = () => {
     const pages = [];
     const maxVisible = 5;
-
     let start = Math.max(1, currentPage - 2);
     let end = Math.min(pageCount, start + maxVisible - 1);
-
     if (end - start < maxVisible - 1) {
       start = Math.max(1, end - maxVisible + 1);
     }
-
     if (start > 1) {
       pages.push(1);
       if (start > 2) pages.push("...");
     }
-
     for (let i = start; i <= end; i++) {
       pages.push(i);
     }
-
     if (end < pageCount) {
       if (end < pageCount - 1) pages.push("...");
       pages.push(pageCount);
     }
-
     return pages;
   };
 
@@ -49,6 +47,7 @@ export default function Pagination({ items, itemsPerPage, setItems }) {
       >
         قبلی
       </button>
+
       {getPages().map((page, index) =>
         page === "..." ? (
           <span key={index} className="px-2">
@@ -66,6 +65,7 @@ export default function Pagination({ items, itemsPerPage, setItems }) {
           </button>
         ),
       )}
+
       <button
         disabled={currentPage === pageCount}
         onClick={() => changePageHandler(currentPage + 1)}
