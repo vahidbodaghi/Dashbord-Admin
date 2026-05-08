@@ -19,13 +19,13 @@ export default function ChangeVisibiltyIcon({ onToggle, product }) {
           آیا از{" "}
           <span
             className={clsx(
-              product.isPunlished
+              product.isPublished
                 ? "text-red-600 bg-red-400/60"
                 : "text-green-600 bg-green-400/60",
               "px-2 rounded-lg py-1 inline-block",
             )}
           >
-            <strong>{product.isPunlished ? "خصوصی" : "عمومی"}</strong>
+            <strong>{product.isPublished ? "خصوصی" : "عمومی"}</strong>
           </span>{" "}
           کردن این محصول اطمینان دارید؟
         </p>

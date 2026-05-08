@@ -12,7 +12,7 @@ import clsx from "clsx";
 import RemoveProductIcon from "./components/RemoveProductIcon";
 import ChangeVisibiltyIcon from "./components/ChangeVisibiltyIcon";
 import EditProductIcon from "./components/EditProductIcon";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import useDelete from "../../hook/useDelete";
 import useUpdate from "../../hook/useUpdate";
 
@@ -30,11 +30,14 @@ export default function ProductsTable() {
       setLastProduct((prev) => prev.filter((product) => product.id !== id));
     }
   };
+  const reversedProducts = useMemo(() => {
+    return [...data].reverse();
+  }, [data]);
   const changeProductVisibility = async (id) => {
     const productToUpdate = lastProduct.find((p) => p.id === id);
     const updatedProduct = {
       ...productToUpdate,
-      isPunlished: !productToUpdate.isPunlished,
+      isPublished: !productToUpdate.isPublished,
     };
 
     const result = await update(
@@ -71,7 +74,7 @@ export default function ProductsTable() {
       <Table
         header={{ title: "لیست محصولات", Buttons: Buttons }}
         pagination={{
-          items: data,
+          items: reversedProducts,
           setItems: setLastProduct,
           itemsPerPage: 5,
         }}
@@ -91,12 +94,12 @@ export default function ProductsTable() {
                   <p
                     className={clsx(
                       "rounded-xl px-2 py-1 border font-light ",
-                      product.isPunlished
+                      product.isPublished
                         ? "bg-green-300 border-green-600 text-green-600"
                         : "bg-red-300 border-red-600 text-red-600",
                     )}
                   >
-                    {product.isPunlished ? "عمومی" : "خصوصی"}
+                    {product.isPublished ? "عمومی" : "خصوصی"}
                   </p>
                 }
               </TableCell>

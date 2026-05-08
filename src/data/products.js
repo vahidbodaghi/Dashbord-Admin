@@ -13,3 +13,12 @@ export const productsAllTableHeadRow = [
   "موجودی",
   "",
 ];
+export const UsersAllTableHeadRow = [
+  "#شناسه",
+  "نام و نام خانوادگی",
+  "نام کاربری",
+  "آدرس ایمیل",
+  "شماره موبایل",
+  "ارشدیت",
+  "",
+];

@@ -1,86 +1,79 @@
-import { useState, useEffect } from "react";
-import { BiEdit } from "react-icons/bi";
+import { useEffect, useState } from "react";
 import Modal from "../../../components/common/Modal/Modal";
-import useUpdate from "../../../hook/useUpdate";
+import useCreate from "../../../hook/useCreate";
 
-export default function EditProductIcon({ product, onUpdate }) {
-  const { update, loading } = useUpdate();
-
+export default function AddProductFields({ onCreate }) {
   const [formState, setFormState] = useState({
-    title: product.title || "",
-    description: product.description || "",
-    price: product.price || "",
-    image: product.image || "",
-    isPublished: product.isPublished ?? false, 
+    title: "",
+    description: "",
+    price: "",
+    image: "",
+    isPublished: false,
+    inventory: "",
   });
 
-  useEffect(() => {
-    setFormState({
-      title: product.title || "",
-      description: product.description || "",
-      price: product.price || "",
-      image: product.image || "",
-      isPublished: product.isPublished ?? false,
-    });
-  }, [product]);
+  const { create, loading, error } = useCreate();
 
   const handleChange = (field, value) => {
     setFormState((prev) => ({ ...prev, [field]: value }));
   };
 
-  
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      handleChange("image", reader.result);
-    };
-    reader.readAsDataURL(file);
-  };
-
-
-  const handleSubmit = async () => {
-    const updatedProduct = {
-      ...product,
+  const createNewProduct = async () => {
+    const newProduct = {
       title: formState.title,
       description: formState.description,
       price: Number(formState.price),
       image: formState.image,
       isPublished: formState.isPublished,
+      inventory: Number(formState.inventory),
     };
 
-    const result = await update(
-      `http://localhost:3001/products/${product.id}`,
-      updatedProduct
-    );
-
+    const result = await create("http://localhost:3001/products", newProduct);
     if (result) {
-      onUpdate?.(result);
-      return true; 
+      onCreate?.(result);
+
+
+      setFormState({
+        title: "",
+        description: "",
+        price: "",
+        image: "",
+        isPublished: false,
+        inventory: "",
+      });
+      return true;
     }
 
-    return false; 
+    return false;
   };
 
-  const Trigger = (
-    <button
-      type="button"
-      className="text-lg text-green-700 hover:text-green-600 transition cursor-pointer"
-    >
-      <BiEdit className="text-xl" />
-    </button>
-  );
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setFormState((prev) => ({
+        ...prev,
+        image: reader.result,
+      }));
+    };
+
+    reader.readAsDataURL(file);
+  };
 
   return (
     <Modal
-      title="ویرایش جزئیات محصول"
-      Trigger={Trigger}
-      onSubmit={handleSubmit}
+      title="ایجاد محصول جدید"
+      onSubmit={createNewProduct}
+      Trigger={
+        <button className="bg-green-500/80 font-regular px-4 py-2 text-sm rounded-md cursor-pointer hover:opacity-90 text-white shadow">
+          ایجاد محصول
+        </button>
+      }
     >
       <div className="flex flex-col gap-5 w-full max-w-lg">
-   
         <div className="flex flex-col gap-2">
           <label htmlFor="title" className="text-sm font-medium text-gray-600">
             نام محصول
@@ -95,9 +88,11 @@ export default function EditProductIcon({ product, onUpdate }) {
           />
         </div>
 
-
         <div className="flex flex-col gap-2">
-          <label htmlFor="description" className="text-sm font-medium text-gray-600">
+          <label
+            htmlFor="description"
+            className="text-sm font-medium text-gray-600"
+          >
             توضیحات محصول
           </label>
           <textarea
@@ -109,7 +104,6 @@ export default function EditProductIcon({ product, onUpdate }) {
             className="bg-gray-50 border border-gray-200 text-gray-800 text-sm rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-400 transition p-2.5 resize-none"
           />
         </div>
-
 
         <div className="flex flex-col gap-2">
           <label htmlFor="price" className="text-sm font-medium text-gray-600">
@@ -124,14 +118,25 @@ export default function EditProductIcon({ product, onUpdate }) {
             className="bg-gray-50 border border-gray-200 text-gray-800 text-sm rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-400 transition p-2.5"
           />
         </div>
+        <div className="flex flex-col gap-2">
+          <label htmlFor="inventory" className="text-sm font-medium text-gray-600">
+            موجودی (تعداد)
+          </label>
+          <input
+            type="number"
+            id="inventory"
+            value={formState.inventory}
+            onChange={(e) => handleChange("inventory", e.target.value)}
+            placeholder="1 عدد"
+            className="bg-gray-50 border border-gray-200 text-gray-800 text-sm rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-400 transition p-2.5"
+          />
+        </div>
 
-  
         <div className="flex flex-col gap-2">
           <label htmlFor="image" className="text-sm font-medium text-gray-600">
             تصویر محصول
           </label>
 
-       
           {formState.image && (
             <img
               src={formState.image}
@@ -149,7 +154,6 @@ export default function EditProductIcon({ product, onUpdate }) {
           />
         </div>
 
-     
         <div className="flex items-center gap-3 mt-2">
           <input
             type="checkbox"
@@ -163,7 +167,6 @@ export default function EditProductIcon({ product, onUpdate }) {
           </label>
         </div>
 
-       
         {loading && (
           <p className="text-sm text-gray-400 mt-1">در حال ذخیره تغییرات...</p>
         )}
@@ -171,4 +174,3 @@ export default function EditProductIcon({ product, onUpdate }) {
     </Modal>
   );
 }
-

@@ -1,5 +1,5 @@
 export default function TableHeadCell({ children }) {
-  return <div>{children}</div>;
+  return <div className="text-center">{children}</div>;
 }
 
 

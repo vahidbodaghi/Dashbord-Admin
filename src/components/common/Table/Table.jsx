@@ -6,6 +6,7 @@ export default function Table({
   children,
   pagination,
 }) {
+  
   const { items = null, setItems = null, itemsPerPage = null } = pagination;
   return (
     <div className="mt-15 border min-w-full bg-white rounded-2xl border-green-400 font-Medium shadow-2xl">
